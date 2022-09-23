@@ -29,6 +29,14 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsManager() throws Exception {
+        //First User
+//        User u = new User();
+//        u.setUserName("Bob");
+//        u.setPassword("boss");
+//        u.setRoles("ROLE_USER,ROLE_ADMIN");
+//        u.setActive(true);
+//        myUserDetailsService.addUser(u);
+
         List<UserDetails> userDetails = new ArrayList<>();
         for (User user: myUserDetailsService.findAllUsers()){
             userDetails.add(new MyUserDetails(user));
