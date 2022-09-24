@@ -22,7 +22,7 @@ public class Controller {
         for (Student student: studentService.getStudents()){
             s += student + "\n";
         }
-        senderService.sendEmail("mkaymon@gmail.com","My List of Students",s);
+        senderService.sendEmail("spam@gmail.com","My List of Students",s);
     }
     @GetMapping("/students")
     public List<Student> getStudents(){

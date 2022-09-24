@@ -13,7 +13,7 @@ public class EmailSenderServiceImp implements EmailSenderService{
     @Override
     public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("mkaymon@gmail.com");
+        message.setFrom("spam@gmail.com");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
