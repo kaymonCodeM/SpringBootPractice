@@ -23,15 +23,23 @@ public class HibernateConfigImp implements HibernateConfig {
     }
 
     @Override
-    public void commit(){
-        transaction.commit();
-        factory.close();
-        session.close();
+    public void finish(){
+        if(factory!=null) {
+            factory.close();
+        }
+        if(session!=null) {
+            session.close();
+        }
     }
 
     @Override
     public Session getSession() {
         return session;
+    }
+
+    @Override
+    public Transaction getTransaction() {
+        return this.transaction;
     }
 
 }

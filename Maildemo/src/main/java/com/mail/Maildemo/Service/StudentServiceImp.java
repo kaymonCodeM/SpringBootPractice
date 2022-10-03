@@ -20,7 +20,7 @@ public class StudentServiceImp implements StudentService {
         Session session = hibernateConfig.getSession();
         Query query = session.createQuery("from Student");
         List<Student> students = query.list();
-        hibernateConfig.commit();
+        hibernateConfig.finish();
         return students;
     }
 
@@ -29,7 +29,8 @@ public class StudentServiceImp implements StudentService {
         hibernateConfig.connect();
         Session session = hibernateConfig.getSession();
         session.save(student);
-        hibernateConfig.commit();
+        hibernateConfig.getTransaction().commit();
+        hibernateConfig.finish();
         return "Successfully Added Student:\n" + student;
     }
 
@@ -40,10 +41,11 @@ public class StudentServiceImp implements StudentService {
         Student student = null;
         try {
             student = session.get(Student.class,studentId);
+            hibernateConfig.getTransaction().commit();
         }catch (Exception e){
             System.out.println("Did not find Student by id: " + studentId);
         }finally {
-            hibernateConfig.commit();
+            hibernateConfig.finish();
         }
         return student;
     }
@@ -54,10 +56,11 @@ public class StudentServiceImp implements StudentService {
         Session session = hibernateConfig.getSession();
         try {
             session.update(student);
+            hibernateConfig.getTransaction().commit();
         }catch (Exception e){
             System.out.println("Not able to update Student:\n"+ student);
         }finally {
-            hibernateConfig.commit();
+            hibernateConfig.finish();
         }
         return "Update Successful:\n" + student;
     }
@@ -70,10 +73,11 @@ public class StudentServiceImp implements StudentService {
             Student s = new Student();
             s.setId(studentId);
             session.delete(s);
+            hibernateConfig.getTransaction().commit();
         }catch (Exception e){
             System.out.println("Delete Failed by id: " + studentId);
         }finally {
-            hibernateConfig.commit();
+            hibernateConfig.finish();
         }
         return "Delete Successful by id: " + studentId;
     }
