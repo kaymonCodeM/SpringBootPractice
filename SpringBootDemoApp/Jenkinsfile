@@ -3,13 +3,17 @@ pipeline {
     stages {
         stage('SCM Checkout'){
             steps{
+                tool name:'maven',type:'maven'
+                tool name:'jdk11',type:'jdk'
                 git 'https://github.com/kaymonCodeM/SpringBootPractice.git'
             }
         }
         stage('compile') {
             steps {
-                def mvnHome = tool name:'maven',type:'maven'
-                bat "${mvnHome}/bin/mvn package"
+                bat '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
                 echo "Compiled Successfully !!"
             }
         }
