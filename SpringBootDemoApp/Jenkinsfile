@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('SCM Checkout'){
             steps{
-                tool name:'M3',type:'maven'
+                tool name:'maven',type:'maven'
                 git 'https://github.com/kaymonCodeM/SpringBootPractice.git'
             }
         }
         stage('compile') {
             steps {
-                bat 'mvn -f SpringBootDemoApp/pom.xml clean install'
+                bat 'mvn --version'
                 bat '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
