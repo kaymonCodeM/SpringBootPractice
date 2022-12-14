@@ -4,7 +4,6 @@ pipeline {
         stage('SCM Checkout'){
             steps{
                 tool name:'maven',type:'maven'
-                tool name:'',type:'jdk'
                 git 'https://github.com/kaymonCodeM/SpringBootPractice.git'
             }
         }
