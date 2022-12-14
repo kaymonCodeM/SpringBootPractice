@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools { 
-        maven 'Maven 3.3.9' 
-        jdk 'jdk8' 
+        def mvnHome = tool name: 'Maven 3.86', type: 'maven'
+        def jdkHome = tool name: 'jdk11', type: 'jdk'
     }
     stages {
         stage ('Initialize') {
