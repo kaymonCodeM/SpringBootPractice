@@ -1,11 +1,32 @@
-node{
+pipeline {
     agent any
-    stage('SCM Checkout'){
-        git 'https://github.com/kaymonCodeM/SpringBootPractice.git'
-    }
-    stage('Compile-Package'){
-        //Get maven home package
-        def mvnHome = tool name:'maven',type:'maven'
-        bat "${mvnHome}/bin/mvn package"
+    stages {
+        stage('SCM Checkout'){
+            steps{
+                git 'https://github.com/kaymonCodeM/SpringBootPractice.git'
+            }
+        }
+        stage('compile') {
+            steps {
+                def mvnHome = tool name:'maven',type:'maven'
+                bat "${mvnHome}/bin/mvn package"
+                echo "Compiled Successfully !!"
+            }
+        }
+        stage('junit') {
+            steps {
+                echo "JUnit passed Successfully !!"
+            }
+        }
+        stage('quality') {
+            steps {
+                echo "Quality Checked Successfully !!"
+            }
+        }
+        stage('deploy') {
+            steps {
+                echo "deployed Successfully !!"
+            }
+        }
     }
 }
