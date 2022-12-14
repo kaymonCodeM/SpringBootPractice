@@ -1,23 +1,11 @@
 pipeline {
     agent any
-    tools { 
-        def mvnHome = tool name: 'Maven 3.86', type: 'maven'
-        def jdkHome = tool name: 'jdk11', type: 'jdk'
+    stage('SCM Checkout'){
+        git 'https://github.com/kaymonCodeM/SpringBootPractice.git'
     }
-    stages {
-        stage ('Initialize') {
-            steps {
-                bat '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
-
-        stage ('Build') {
-            steps {
-                echo 'This is a minimal pipeline.'
-            }
-        }
+    stage('Compile-Package'){
+        //Get maven home package
+        def mvnHome = tool name:'maven',type:'maven'
+        bat "${mvnHome}/bin/mvn package"
     }
 }
